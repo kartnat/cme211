@@ -1,1 +1,58 @@
-README file for hw1
+python3 generatedata.py 1000 600 50 ref_1.txt reads_1.txt
+reference length: 1000
+number reads: 600
+read length: 50
+aligns 0: 0.12166666666666667
+aligns 1: 0.785
+aligns 2: 0.09333333333333334
+
+python3 processdata.py ref_1.txt reads_1.txt align_1.txt
+reference length: 1000
+number reads: 600
+aligns 0: 0.12166666666666667
+aligns 1: 0.785
+aligns 2: 0.09333333333333334
+elapsed time: 0.005453348159790039
+
+python3 generatedata.py 10000 6000 50 ref_2.txt reads_2.txt
+reference length: 10000
+number reads: 6000
+read length: 50
+aligns 0: 0.14683333333333334
+aligns 1: 0.7418333333333333
+aligns 2: 0.11133333333333334
+
+python3 processdata.py ref_2.txt reads_2.txt align_2.txt
+reference length: 10000
+number reads: 6000
+aligns 0: 0.14683333333333334
+aligns 1: 0.7418333333333333
+aligns 2: 0.11133333333333334
+elapsed time: 0.2750966548919678
+
+python3 generatedata.py 100000 60000 50 ref_3.txt reads_3.txt
+reference length: 100000
+number reads: 60000
+read length: 50
+aligns 0: 0.14875
+aligns 1: 0.7495666666666667
+aligns 2: 0.10168333333333333
+
+python3 processdata.py ref_3.txt reads_3.txt align_3.txt
+reference length: 100000
+number reads: 60000
+aligns 0: 0.14875
+aligns 1: 0.7495666666666667
+aligns 2: 0.10168333333333333
+elapsed time: 24.883212089538574$ 
+
+
+Designing the handwritten test data was straightforward.  I just chose a string of 10 digits with a string of 3 repeated, thinking it would be easy to pick length 3 reads meeting the desired properties.  The way the code was written it should generalize to longer reference strings and larger number of reads, barring memory constraints and edge cases, like trying to to find a read that aligns once which has length greater than ref_length.  If the reference length is very long compared to the read length it might take awhile to generate a read that aligns zero times.  
+
+The distribution of reads need not be an exact split, although the probability that it is an exact split would go up  as the number of generated reads increases. This is because probablity is a long term relative frequency.  Probably theway the random.random() function determines a number in the interval would influence the exact distribution as well.  I spent about 5 hours writing this generatedata.py part.  
+
+The distribution of reads obtained from the processing code does match what I obtained from the data generation code because (a) reads that aligned zero times are still going to align zero times when run through the processing code, and (b) there happened to not be reads that in reality appeared more than once (or twice, depending on if they were extracted from the first 50% or last 25%) in the reference.  
+
+The implementation does not appear to be very scalable as it would take at least (3000000000)/(1000000) = 3000*25 = 75000s ~ 21 hrs to process the full, human genome at 30x coverage with a read length of 50.  If one were to plot the runtimes as a function of reference length, one would find the slope of the lines cconnecting the larger two points (in terms of reference length) is about 10x that of the slope connecting the the smaller two points, which could imply a quadratic run time or at least something of order n^k, k > 1.  More data would need to be collected to confirm this and the program further analyzed--the runtimes could scale differently with respect to nreads, for example.  
+
+The processdata code took me about 8 hours to get working correctly.   
