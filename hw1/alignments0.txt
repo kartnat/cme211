@@ -1,5 +1,0 @@
-CCC -1
-CGA 0 5 
-ATC 2 
-CCG 4 
-ATT 7 
