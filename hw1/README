@@ -56,3 +56,4 @@ The distribution of reads obtained from the processing code does match what I ob
 The implementation does not appear to be very scalable as it would take at least (3000000000)/(1000000) = 3000*25 = 75000s ~ 21 hrs to process the full, human genome at 30x coverage with a read length of 50.  If one were to plot the runtimes as a function of reference length, one would find the slope of the lines cconnecting the larger two points (in terms of reference length) is about 10x that of the slope connecting the the smaller two points, which could imply a quadratic run time or at least something of order n^k, k > 1.  More data would need to be collected to confirm this and the program further analyzed--the runtimes could scale differently with respect to nreads, for example.  
 
 The processdata code took me about 8 hours to get working correctly.   
+
