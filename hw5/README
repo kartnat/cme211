@@ -1,1 +1,8 @@
-readme
+The problem was to solve a maze using the "right-hand algorithm".  More explicitly, the C++ program mazesolver.cpp takes in a file with maze dimensions and wall positions and writes the positions of the path taken to navigate the given maze to another file.  My program is structured as follows:
+
+1. Confirm that enough (two) commandline arguments were passed, one the maze file and the other the solution file, and print usage information if not.
+2. Verify the static array that was initialized to hold the maze is large enough and if so initialize a maze of the given dimensions and overwrite the wall entries with zeroes.  
+3. Begin traversing the maze. As suggested, we utilized a state machine approach, where at each position we associate a direction and try to move rightwards, relative to that direction.  For example, if the user is facing South (as at the start of the maze) the program attempts to make him/her move West, South, East, and North, respectively.  At each step the new position is written to the solution file.  
+4. The loop terminates once the last row is reached, and the solution file is closed.
+
+Checksoln.py simply takes in the maze and solution files and verifies that the solution is valid, namely that it delineates a path which begins at the first row, doesn't pass through walls and proceeds in unit steps (no diagonals or jumps), and reaches the last row.  As was expected, I initialized a 2d numpy array to house the maze and compared each position in the solution file to the previous and against the array to determine validity.  If the last row is reached the solution was then determined to be valid.        
