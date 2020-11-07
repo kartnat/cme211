@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\begin{document}
+
+\begin{algorithm}
+\caption{Conjugate Gradient Method}
+\begin{algorithmic}	
+	%begin{algorithmic}
+	\STATE initialize $u_0$
+	\STATE $r_0 = b-Au_0$
+	\STATE L2normr0 = L2norm($r_0$)
+	\STATE $p_0 = r_0$
+	\STATE niter $=0$
+	\WHILE{niter $<$ nitermax}
+		\STATE niter = niter $+1$
+		\STATE alpha$_n$ = $(r_n^Tr_n)/(p_n^TAp_n)$
+		\STATE $u_{n+1} = u_n+\text{alpha}_np_n$
+		\STATE $r_{n+1} = r_n - \text{alpha}_nAp_n$
+		\STATE L2normr = L2norm($r_{n+1}$)
+		\IF{L2normr/L2normr0 $<$ threshold}
+		\STATE break
+		\ENDIF
+		\STATE $\text{beta}_n = (r_{n+1}^Tr_{n+1})/(r_n^Tr_n)$
+		\STATE $p_{n+1} = r_{n+1} + \text{beta}_np_n$
+		
+	\ENDWHILE
+	%\end{algorithmic}
+\end{algorithmic}
+\end{algorithm}
+
+Writeup: CGSolver.cpp invokes functions from matvecops.cpp, which contains a variety of common functions for working with matrix-vector products.  They are outlined below:
+\begin{itemize}
+\item L2norm--returns the L2norm of a vector
+\item dot--returns the scalar product of two vectors
+\item scalMult--returns the scalar product $\alpha v$ of a double precision scalar $\alpha$ with a vector $v$.
+\item vecAdd--returns the vector addition of two vectors $v_1$ and $v_2$.  
+\item MatMult--returns the matrix product of $Av$, where $A$ is given in CSR format.
+
+\end{itemize}
+
+This eliminated redundant code because each operation above was used more than once.  For matrix-vector multiplication for example, we first calculate $Au_0$, and then $Ap_n$ a couple times.  Each of these becomes one function call, as opposed to writing out the function twice, which results in cluttered code.
+
+\end{document}
