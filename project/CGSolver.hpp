@@ -9,12 +9,11 @@
  *
  * where A is in CSR format.  The starting guess for the solution
  * is provided in x, and the solver runs a maximum number of iterations
- * equal to the size of the linear system.  Function returns the
- * number of iterations to converge the solution to the specified
- * tolerance, or -1 if the solver did not converge.
+ * equal to the size of the linear system.  Function returns a solution 
+ * vector containing the solution at specified intervals.
  */
 
-int CGSolver(std::vector<double> &val,
+std::vector<std::vector<double>> CGSolver(std::vector<double> &val,
              std::vector<int>    &row_ptr,
              std::vector<int>    &col_idx,
              std::vector<double> &b,
