@@ -1,1 +1,5 @@
-readme
+My code essentially performs certain operations on a particular jpeg image, like reading it into a pixel array, saving modified versions of the image, blurring the image and outputting the sharpness of the image.  Most of these are designed as methods of an 'Image' class (descriptions in the docstrings, within the image.hpp file), while the key function for actually performing nontrivial image operatons (like blurring, sharpness), is my Convolution function.  Some of what I would consider are key implementation details are as follows:
+
+1. The image is stored as a boost multiarray, which supports range checking and compiler optimizations when performing some of the key image operations.  This makes its performance on par with that of static arrays.
+
+2. When performing the convolution I create a larger array, inflated by the size of the kernel, which incurs some additional storage cost as opposed to simply working with the original imput image to populate the output array.  This was because I wanted to make the actual computational step of convoluting with the kernel simple (minimal if statements).  In hindsight however this might not scale well with multiple images of varying (larger) sizes.  
