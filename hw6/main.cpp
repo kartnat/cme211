@@ -14,13 +14,15 @@ int main() {
   //Creating new instances of the image class with the same
   //stanford.jpg file, blurring the image, saving it, and 
   //printing the sharpness to console.
-  
+//--design_0
+//--A loop makes more sense here
+//--START
   Image i1(file);
   unsigned int size = 3;
   std::cout << "BoxBlur( 3): " << i1.BoxBlur(size) << std::endl;
   std::string saveFile = "BoxBlur03.jpg";
   i1.Save(saveFile);
-            
+//--END
   Image i2(file);
   size = 7;
   std::cout << "BoxBlur( 7): " << i2.BoxBlur(size) << std::endl;

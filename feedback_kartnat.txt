@@ -1,0 +1,65 @@
+FILE:          image.cpp
+DESIGN         
+
+COMMENTS:
+-Copying is inefficient
+
+RELEVANT CODE:
+for (long unsigned int i=0;i<tmpH;i++) {
+      for (long unsigned int j=0;j<tmpW;j++) {
+        //If entry lies in the original jpeg input, copy it
+        if (i >= addLen/2 && i < tmpH-addLen/2 && j>= addLen/2 && j < tmpW-addLen/2) {
+          tmp[i][j] = input[i-addLen/2][j-addLen/2];
+          }
+
+POINTS DEDUCTED: 1
+
+
+--------------------------
+FILE:          image.cpp
+STYLE          
+
+COMMENTS:
+-Careful with double casts
+
+RELEVANT CODE:
+output[i][j] = (unsigned char)((unsigned int)(sum));}
+
+                  
+
+
+--------------------------
+FILE:          main.cpp
+DESIGN         
+
+COMMENTS:
+-A loop makes more sense here
+
+RELEVANT CODE:
+Image i1(file);
+  unsigned int size = 3;
+  std::cout << "BoxBlur( 3): " << i1.BoxBlur(size) << std::endl;
+  std::string saveFile = "BoxBlur03.jpg";
+  i1.Save(saveFile);
+
+                  
+
+
+--------------------------
+
+GRADING TA                  
+SUNet ID: gbescos, GitHub ID guibescos
+###################################################
+
+FUNCTIONALITY SCORE:                      +
+###################################################
+
+DESIGN SCORE:                            ok
+###################################################
+
+STYLE SCORE:                              +
+###################################################
+
+WRITEUP SCORE:                            +
+###################################################
+If you have any problem about grading result, please file an issue in your GitHub repo.

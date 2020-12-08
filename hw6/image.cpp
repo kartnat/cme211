@@ -28,12 +28,16 @@ void Convolution(boost::multi_array<unsigned char,2>& input,
     long unsigned int tmpW = tmp.shape()[1];
     // Populating larger array (tmp) that has all necessary entries to compute
     // the convolution 
+//--design_1
+//--Copying is inefficient
+//--START
     for (long unsigned int i=0;i<tmpH;i++) {
       for (long unsigned int j=0;j<tmpW;j++) {
         //If entry lies in the original jpeg input, copy it
         if (i >= addLen/2 && i < tmpH-addLen/2 && j>= addLen/2 && j < tmpW-addLen/2) {
           tmp[i][j] = input[i-addLen/2][j-addLen/2];
           }
+//--END
         //Out of bounds on left or right of image
         else if ((i < addLen/2 || i >= tmpH-addLen/2) && j>= addLen/2 && j < tmpW-addLen/2) {
           if (i < addLen/2) {
@@ -77,7 +81,11 @@ void Convolution(boost::multi_array<unsigned char,2>& input,
         else if (sum > 255) {
           output[i][j] = (unsigned char)255; }
         else {
+//--style_0
+//--Careful with double casts
+//--START
           output[i][j] = (unsigned char)((unsigned int)(sum));}
+//--END
       }
     }  
 }
